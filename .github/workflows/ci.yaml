@@ -1,39 +1,36 @@
----
+name: python ci/cd workflow
 
-  name: python ci/cd workflow
+on: [push]
 
-  on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-  strategy:
+    strategy:
       matrix:
-        python-version: ["3.7" , "3.8" , "3.8" , "3.10"]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v5
 
-        - name: checkout code
-          uses: actions/checkout@v5
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
-        - name: set up python
-          uses: actions/setup-python@v5
-          with:
-              python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          cd chapter1
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-        - name: Install dependencies
-          run: |
-            cd chapter1
-            python -m pip install --upgrade pip
-            if [ -f requirements.txt ] then pip install -r requirements.txt; fi
+      - name: Test with pytest
+        run: |
+          cd chapter1
+          pip install pytest pytest-cov
+          pytest test_app.py --doctest-modules --junitxml=junit/test-results.xml --cov=app --cov-report=xml --cov-report=html
 
-
-          -name: Test with pytest
-          run: |
-            cd chapter1
-            pip install pytest pytest-cov
-            pytest test_app.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
-
-          -name: notify success of build
-          if: success()
-          run: echo "Tests passed on python ${{ matrix.python-version }}"
+      - name: notify success of build
+        if: success()
+        run: echo "Tests passed on python ${{ matrix.python-version }}"
