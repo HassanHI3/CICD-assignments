@@ -1,15 +1,15 @@
 terraform {
-    required_providers {
+  required_providers {
     aws = {
-    source  = "hashicorp/aws"
-    version = "4.0.0"
+      source  = "hashicorp/aws"
+      version = "4.0.0"
     }
   }
 
   backend "s3" {
-    bucket = "terraform-assignment-100"
-    key    = "terraform/state/my-python-app.tfstate"
-    region = "eu-west-2"
+    bucket       = "terraform-assignment-101"
+    key          = "terraform/state/my-python-appp.tfstate"
+    region       = "eu-west-2"
     use_lockfile = true
   }
 }
