@@ -55,9 +55,9 @@ jobs:
       - name: terraform plan
         run: |
           cd chapter1
-          terraform plan
+          terraform plan -out=tfplan
 
       - name: terraform apply
         run: |
           cd chapter1
-          terraform apply
+          terraform apply -auto-approve tfplan
