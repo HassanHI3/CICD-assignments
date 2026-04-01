@@ -41,6 +41,12 @@ jobs:
         with:
           terraform_version: 1.5.0
 
+
+      - name: initialize terraform
+        run: |
+          cd chapter1
+          terraform init
+
       - name: terraform validate
         run: |
           cd chapter1
@@ -50,11 +56,6 @@ jobs:
         run: |
           cd chapter1
           terraform fmt -check
-
-      - name: initialize terraform
-        run: |
-          cd chapter1
-          terraform init
 
       - name: terraform plan
         run: |
