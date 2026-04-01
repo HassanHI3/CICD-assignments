@@ -7,9 +7,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "terraform-assignment-101"
-    key          = "terraform/state/my-python-appp.tfstate"
-    region       = "eu-west-2"
+    bucket = "terraform-assignment-101"
+    key    = "terraform/state/my-python-appp.tfstate"
+    region = "eu-west-2"
   }
 }
 

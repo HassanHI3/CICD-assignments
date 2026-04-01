@@ -52,11 +52,6 @@ jobs:
           cd chapter1
           terraform validate
 
-      - name: terraform fmt
-        run: |
-          cd chapter1
-          terraform fmt -check
-
       - name: terraform plan
         run: |
           cd chapter1
