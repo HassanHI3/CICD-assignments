@@ -7,3 +7,7 @@ venv/
 coverage.xml
 htmlcov/
 junit/
+*.tfstate
+*.tfstate.backup
+*.terraform/
+*.tfplan

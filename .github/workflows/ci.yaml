@@ -1,4 +1,4 @@
-name: python ci/cd workflow
+name: python ci workflow
 
 on: [push, pull_request]
 
