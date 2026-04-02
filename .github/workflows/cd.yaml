@@ -39,19 +39,6 @@ jobs:
         run: |
           aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 891377356090.dkr.ecr.eu-west-2.amazonaws.com
 
-      - name: Build Docker image
-        run: |
-          cd chapter1
-          docker buildx build --platform linux/amd64 -t my-app --load .
-
-      - name: Tag Docker image
-        run: |
-          docker tag my-app:latest 891377356090.dkr.ecr.eu-west-2.amazonaws.com/my-app:latest
-
-      - name: Push Docker image
-        run: |
-          docker push 891377356090.dkr.ecr.eu-west-2.amazonaws.com/my-app:latest
-
       - name: set up terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -76,6 +63,19 @@ jobs:
         run: |
           cd chapter1
           terraform apply -auto-approve tfplan
+
+      - name: Build Docker image
+        run: |
+          cd chapter1
+          docker buildx build --platform linux/amd64 -t my-app --load .
+
+      - name: Tag Docker image
+        run: |
+          docker tag my-app:latest 891377356090.dkr.ecr.eu-west-2.amazonaws.com/my-app:latest
+
+      - name: Push Docker image
+        run: |
+          docker push 891377356090.dkr.ecr.eu-west-2.amazonaws.com/my-app:latest
 
       - name: Force new ECS deployment
         run: |
