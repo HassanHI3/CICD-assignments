@@ -19,8 +19,8 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-resource "aws_ecr_repository" "task-2" {
-  name                 = "bar"
+resource "aws_ecr_repository" "task_2" {
+  name                 = "my-app"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -104,7 +104,7 @@ resource "aws_ecs_service" "my_app_ecs_service" {
   name            = "my-app"
   cluster         = aws_ecs_cluster.task_2.id
   task_definition = aws_ecs_task_definition.test.arn
-  desired_count   = 3
+  desired_count   = 1
   launch_type     = "FARGATE"
 
   network_configuration {
