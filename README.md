@@ -5,12 +5,12 @@ This project demonstrates building a basic CI pipeline and a simple CD workflow 
 
 ## 📌 Tasks
 
-### ✅ Task 1 – CI
+### Task 1 – CI
 - Triggered on push/PR  
 - Installs dependencies  
 - Runs unit tests with `pytest`  
 
-### ✅ Task 2 – CD
+### Task 2 – CD
 - Builds Docker image  
 - Pushes image to Amazon ECR  
 - Deploys app to AWS ECS (Fargate)  
